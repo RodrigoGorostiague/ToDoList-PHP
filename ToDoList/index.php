@@ -1,6 +1,9 @@
 <?php 
+    require 'tareas.php';
     function home(){
         $titulo = "To Do List";
+
+        
     
 ?>
 
@@ -14,16 +17,23 @@
   </head>
   <body>
     <h1> <?php echo $titulo ?> </h1>
-
     <div class="conteiner">
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center active">
-                Tarea 1
-                <span class="badge bg-secondary badge-pill">pill1</span>
-            </li>
-    </ul>   
+
+        <?php 
+          foreach(getTareas() as $tarea){
+            if($tarea['completada']== 1){
+                echo '<li class="list-group-item d-flex justify-content-between align-items-center">'.$tarea['titulo'].': '.$tarea['descripcion'].'<span class="badge text-bg-info">Completada</span></li>';
+            }else{
+                echo '<li class="list-group-item d-flex justify-content-between align-items-center">'.$tarea['titulo'].': '.$tarea['descripcion'].'<span class="badge text-bg-danger">Sin Completar</span>
+                </li>';
+            }
+          }
+        ?>
+         </ul>   
     </div>
     <div class="conteiner">
+      <h2>Crear tarea</h2>
     <form>
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Titulo</label>
